@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Attendance System</title>
+    <link rel="stylesheet" href="AMS.CSS">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <button id="showAttendance" class="nav-button active">Attendance Log</button>
+            <button id="showRegistration" class="nav-button">Register User</button>
+        </nav>
+
+        <h1>User Attendance System</h1>
+
+        <!-- Attendance Interface Section -->
+        <div id="attendanceSection" class="app-section">
+            <div class="form-section">
+                <h2>Log Your Attendance</h2>
+                <form id="attendanceForm">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group image-capture-group">
+                        <label>Capture Image:</label>
+                        <div class="camera-feed">
+                            <video id="cameraFeed" autoplay playsinline></video>
+                            <canvas id="imageCanvas" style="display: none;"></canvas>
+                        </div>
+                        <div class="camera-controls">
+                            <button type="button" id="startCameraButton" class="camera-button">Start Camera</button>
+                            <button type="button" id="captureImageButton" class="camera-button" disabled>Capture Image</button>
+                            <button type="button" id="stopCameraButton" class="camera-button" disabled>Stop Camera</button>
+                        </div>
+                        <div class="captured-image-preview">
+                            <img id="capturedImageThumbnail" src="" alt="Captured Image" style="display: none;">
+                            <p id="imageStatus">No image captured.</p>
+                            <input type="hidden" id="capturedImageData" name="capturedImage">
+                        </div>
+                    </div>
+
+                    <div class="message-box" id="attendanceMessage"></div>
+                    <div class="button-group">
+                        <button type="submit" class="submit-button">Submit Attendance</button>
+                        <button type="button" id="resetAttendanceForm" class="reset-button">Reset Fields</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="display-section">
+                <h2>Current Submission</h2>
+                <p id="currentName">Name: </p>
+                <p id="currentEmail">Email: </p>
+                <p id="currentTimestamp">Timestamp: </p>
+                <div class="current-image-preview">
+                    <p>Image:</p>
+                    <img id="currentImageThumbnail" src="" alt="Current Captured Image" style="display: none;">
+                </div>
+            </div>
+
+            <div class="history-section">
+                <h2>Attendance History</h2>
+                <div id="attendanceHistory">
+                    <p class="no-history">No attendance history yet.</p>
+                </div>
+                <div class="history-buttons">
+                    <button id="downloadCsvButton" class="download-button">Download History (CSV)</button>
+                    <button id="resetHistoryButton" class="reset-button">Clear All History</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Registration Interface Section -->
+        <div id="registrationSection" class="app-section hidden">
+            <div class="form-section">
+                <h2>User Registration Form</h2>
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="regName">Name:</label>
+                        <input type="text" id="regName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Email:</label>
+                        <input type="email" id="regEmail" required>
+                    </div>
+                    <div class="message-box" id="registrationMessage"></div>
+                    <div class="button-group">
+                        <button type="submit" class="submit-button">Register User</button>
+                        <button type="button" id="resetRegistrationForm" class="reset-button">Reset Fields</button>
+                    </div>
+                </form>
+
+                <hr class="separator">
+                <h3>Bulk User Upload (CSV)</h3>
+                <div class="bulk-upload-section">
+                    <p>Prepare a CSV file with 'Name' and 'Email' columns.</p>
+                    <a href="data:text/csv;charset=utf-8,Name%2CEmail%0A" download="user_template.csv" class="download-template-link">Download Template CSV</a>
+                    <div class="form-group">
+                        <label for="bulkUploadCsvInput">Select CSV File:</label>
+                        <input type="file" id="bulkUploadCsvInput" accept=".csv">
+                    </div>
+                    <div class="message-box" id="bulkUploadMessage"></div>
+                    <button type="button" id="uploadCsvButton" class="submit-button">Upload & Register Users</button>
+                </div>
+
+                <div class="history-buttons">
+                    <button id="downloadRegisteredUsersCsvButton" class="download-button">Download Registered Users (CSV)</button>
+                    <button id="clearRegisteredUsersButton" class="reset-button">Clear All Registered Users</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="AMS.js"></script>
+</body>
+</html>
